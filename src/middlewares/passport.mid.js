@@ -76,14 +76,14 @@ passport.use(
 passport.use(
   "google",
   new GoogleStrategy(
-    /* objeto de configuración de la estrategia */
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "http://localhost:8090/api/auth/google/callback",
+      callbackURL:
+        process.env.GOOGLE_CALLBACK_URL ||
+        "http://localhost:8090/api/auth/google/callback",
       passReqToCallback: true,
     },
-    /* callback done con la logica necesaria para la estrategia */
     async (req, accesToken, refreshToken, profile, done) => {
       try {
         let user = await usersManager.readOne({ email: profile.id });
@@ -97,6 +97,7 @@ passport.use(
           };
           user = await usersManager.createOne(user);
         }
+
         const token = createToken({
           email: user.email,
           role: user.role,
@@ -105,6 +106,7 @@ passport.use(
           last_name: user.last_name,
           avatar: user.avatar,
         });
+
         req.token = token;
         done(null, user);
       } catch (error) {
