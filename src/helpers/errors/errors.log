@@ -1,0 +1,10 @@
+[31mERROR[39m: getaddrinfo ENOTFOUND localhdost
+[31mERROR[39m: bad auth : authentication failed
+[31mERROR[39m: bad auth : authentication failed
+[31mERROR[39m: bad auth : authentication failed
+[31mERROR[39m: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+[31mERROR[39m: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+[31mERROR[39m: The `uri` parameter to `openUri()` must be a string, got "undefined". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.
+[31mERROR[39m: read ECONNRESET
+[31mERROR[39m: Error al actualizar stock: Cast to ObjectId failed for value "null" (type string) at path "_id" for model "Product"
+[31mERROR[39m: Error al actualizar stock: Cast to ObjectId failed for value "null" (type string) at path "_id" for model "Product"

@@ -1,0 +1,43 @@
+<div class="compra container">
+  <h1 class="h1-comprar">🧾 Resumen de Compra</h1>
+
+  {{#if productos.length}}
+    <div class="table-responsive">
+      <table class="compra-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each productos}}
+            <tr>
+              <td>{{this.title}}</td>
+              <td>${{formatNumber this.price}}</td>
+              <td>{{this.quantity}}</td>
+              <td>${{formatNumber this.subtotal}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="final-box">
+      <div class="total-box">
+        <span>Total:</span>
+        <strong>${{formatNumber total}}</strong>
+      </div>
+      <button id="btn-finalizarCompra" class="btn-finalizar">
+        Finalizar Compra
+      </button>
+    </div>
+  {{else}}
+    <p class="empty-msg">No hay productos para comprar.</p>
+  {{/if}}
+
+  <script src="/js/global.js"></script>
+  <script src="/js/comprar.js"></script>
+</div>

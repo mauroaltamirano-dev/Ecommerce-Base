@@ -1,0 +1,45 @@
+<div class="form-container">
+    <h2>Mi perfil (vía JWT)</h2>
+    <p><strong>Nombre:</strong> <span id="nombreUsuario">Cargando...</span></p>
+    <p><strong>Email:</strong> <span id="emailUsuario">Cargando...</span></p>
+    <p><strong>Rol:</strong> <span id="rolUsuario">Cargando...</span></p>
+    <button id="btnLogoutJWT">Cerrar sesión</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('jwtToken');
+
+        if (!token) {
+        return window.location.href = '/jwt/login';
+        }
+
+        try {
+        const res = await fetch('/jwt/current', {
+            headers: {
+            Authorization: 'Bearer ' + token
+            }
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.user) {
+            document.getElementById('nombreUsuario').textContent = data.user.name;
+            document.getElementById('emailUsuario').textContent = data.user.email;
+            document.getElementById('rolUsuario').textContent = data.user.role;
+        } else {
+            alert('Token inválido o expirado');
+            localStorage.removeItem('jwtToken');
+            window.location.href = '/jwt/login';
+        }
+        } catch (err) {
+        console.error('❌ Error al cargar perfil:', err);
+        window.location.href = '/jwt/login';
+        }
+    });
+
+    document.getElementById('btnLogoutJWT').addEventListener('click', () => {
+        localStorage.removeItem('jwtToken');
+        window.location.href = '/jwt/login';
+    });
+</script>

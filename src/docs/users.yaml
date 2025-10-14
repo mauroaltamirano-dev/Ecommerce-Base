@@ -1,0 +1,186 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "665f3d0c0a731b6217e0db42"
+        provider:
+          type: string
+          enum: [local, google]
+          example: local
+        googleId:
+          type: string
+          nullable: true
+          example: "111970091664030036562"
+        name:
+          type: string
+          example: Mauro
+        last_name:
+          type: string
+          example: Altamirano
+        email:
+          type: string
+          format: email
+          example: m.e.altamirano88@gmail.com
+        password:
+          type: string
+          example: hola1234
+        avatar:
+          type: string
+          format: uri
+          example: "https://miro.medium.com/v2/resize:fit:640/format:webp/1*W35QUSvGpcLuxPo3SRTH4w.png"
+        role:
+          type: string
+          enum: [USER, ADMIN, PREM]
+          example: USER
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Login:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: m.e.altamirano88@gmail.com
+        password:
+          type: string
+          example: hola1234
+
+  responses:
+    UserCreated:
+      description: Usuario creado correctamente
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+    UserUpdated:
+      description: Usuario actualizado correctamente
+    UserDeleted:
+      description: Usuario eliminado correctamente
+    InvalidCredentials:
+      description: Credenciales inválidas
+    NotFound:
+      description: Usuario no encontrado
+    ServerError:
+      description: Error interno del servidor
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Fatal
+              method:
+                type: string
+                example: GET
+              url:
+                type: string
+                example: /api/users
+
+paths:
+  /api/users:
+    get:
+      summary: Obtener todos los usuarios
+      tags:
+        - User
+      security:
+        - cookieAuth: []
+      responses:
+        200:
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        401:
+          $ref: "#/components/responses/InvalidCredentials"
+        403:
+          description: Prohibido, se requiere ADMIN
+        500:
+          $ref: "#/components/responses/ServerError"
+
+  /api/auth/register:
+    post:
+      summary: Para registrar un usuario
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        201:
+          $ref: "#/components/responses/UserCreated"
+        401:
+          $ref: "#/components/responses/InvalidCredentials"
+
+  /api/auth/login:
+    post:
+      summary: Para iniciar sesión
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        200:
+          description: Login exitoso
+        401:
+          $ref: "#/components/responses/InvalidCredentials"
+
+  /api/users/{uid}:
+    put:
+      summary: Actualiza datos de un usuario
+      tags:
+        - User
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        200:
+          $ref: "#/components/responses/UserUpdated"
+        404:
+          $ref: "#/components/responses/NotFound"
+
+    delete:
+      summary: Elimina un usuario por ID
+      tags:
+        - User
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: "#/components/responses/UserDeleted"
+        404:
+          $ref: "#/components/responses/NotFound"

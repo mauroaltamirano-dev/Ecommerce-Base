@@ -1,0 +1,36 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/" class="nav-link">🏠 Inicio</a>
+    {{#ifEquals usuario.role "ADMIN"}}
+    <a href="/realtimeproducts" class="nav-link">➕ Agregar Producto</a>
+    {{/ifEquals}}
+    <a href="/cart/{{carritoId}}" class="nav-link">🛒 Ir al Carrito</a>
+  </div>
+
+
+  <div class="nav-right">
+  {{#if usuario}}
+    <div class="nav-user">
+      {{!-- <pre>{{json usuario}}</pre> --}}
+      <a href="/profile" class="USER">👤 {{usuario.name}} ({{usuario.role}})</a>
+      {{#ifEquals usuario.role "USER"}}
+        <form action="/api/auth/setadmin" method="POST" style="display:inline;">
+          <button type="submit" class="nav-link" style="background:none; border:none; padding:0; cursor:pointer; color:white;">
+            🔒 Convertirme en admin
+          </button>
+        </form>
+      {{/ifEquals}}
+            {{#ifEquals usuario.role "ADMIN"}}
+        <form action="/api/auth/setuser" method="POST" style="display:inline;">
+          <button type="submit" class="nav-link" style="background:none; border:none; padding:0; cursor:pointer; color:white;">
+            🔒 Convertirme en user
+          </button>
+        </form>
+      {{/ifEquals}}
+      <a href="/api/auth/signout" class="nav-link">🚪 Cerrar sesión</a>
+    </div>
+  {{else}}
+    <a href="/login" class="nav-link" id="session-login-link">🔐 Iniciar sesión</a>
+    <div id="jwt-navbar-placeholder"></div>
+  {{/if}}
+</nav>

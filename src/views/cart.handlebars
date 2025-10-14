@@ -1,0 +1,47 @@
+<div class="cart container">
+  <h1 class="cart-title">🛒 Carrito de Compras</h1>
+
+  {{#if carrito.products.length}}
+    <div class="table-responsive">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each carrito.products}}
+          <tr>
+            <td><img src="{{this.product.image}}" alt="Imagen de {{this.product.title}}" class="img-mini"></td>
+            <td>{{this.product.title}}</td>
+            <td>${{formatNumber this.product.price}}</td>
+            <td><span class="cantidad" data-pid="{{this.product._id}}">{{this.quantity}}</span></td>
+            <td>$<span class="subtotal" data-pid="{{this.product._id}}">{{formatNumber (multiply this.quantity this.product.price)}}</span></td>
+            <td>
+              <button class="btn-action btn-sumar" data-pid="{{this.product._id}}"><i class="fas fa-plus"></i></button>
+              <button class="btn-action btn-restar" data-pid="{{this.product._id}}"><i class="fas fa-minus"></i></button>
+            </td>
+            <td><button class="btn-action btn-eliminar" data-pid="{{this.product._id}}"><i class="fas fa-trash"></i></button></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cart-buttons">
+      <button id="btn-comprar" class="btn-add">🛒 Ir a Comprar</button>
+      <button id="btn-vaciarCarrito" class="btn-add btn-clear">🧹 Vaciar carrito</button>
+    </div>
+  {{else}}
+    <p class="empty-msg">No hay productos en este carrito.</p>
+  {{/if}}
+
+  <script src="/js/global.js"></script>
+  <script src="/js/cart.js"></script>
+</div>

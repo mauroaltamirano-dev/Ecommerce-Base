@@ -1,0 +1,114 @@
+.producto-detalle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  max-width: 960px;
+  margin: var(--space-lg) auto;
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border-radius: var(--space-lg);
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+}
+
+.galeria {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imagen-principal {
+  width: 100%;
+  max-width: 400px;
+  object-fit: contain;
+  border-radius: var(--space-sm);
+  margin-bottom: var(--space);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.miniaturas {
+  display: flex;
+  gap: var(--space);
+}
+
+.miniaturas img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--space-sm);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.miniaturas img:hover {
+  transform: scale(1.1);
+}
+
+.informacion {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space);
+}
+
+.titulo {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+}
+
+.precio {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.informacion p {
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
+.btn-add {
+  margin-top: var(--space);
+  padding: 0.6rem 1.2rem;
+  background: var(--color-accent);
+  color: var(--color-surface);
+  border: none;
+  border-radius: var(--space-sm);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.btn-add:hover {
+  opacity: 0.9;
+}
+
+.btn-add.disabled {
+  background: var(--color-secondary);
+  cursor: not-allowed;
+}
+
+.btn-volver {
+  margin-top: var(--space);
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.btn-volver:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: var(--bp-md)) {
+  .producto-detalle {
+    flex-direction: column;
+    padding: var(--space);
+  }
+  .galeria,
+  .informacion {
+    flex: 1 1 100%;
+  }
+}

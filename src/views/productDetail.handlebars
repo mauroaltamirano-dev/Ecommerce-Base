@@ -1,0 +1,29 @@
+<div class="producto-detalle">
+  <div class="galeria">
+    <img class="imagen-principal" src="{{producto.image}}" alt="Imagen de {{producto.title}}" />
+    <div class="miniaturas">
+      <img src="{{producto.image}}" alt="Vista 1">
+      <img src="{{producto.image}}" alt="Vista 2">
+      <img src="{{producto.image}}" alt="Vista 3">
+    </div>
+  </div>
+
+  <div class="informacion">
+    <h1 class="titulo">{{producto.title}}</h1>
+    <p class="precio"><strong>Precio:</strong> ${{formatNumber producto.price}}</p>
+    <p><strong>Categoría:</strong> {{producto.category}}</p>
+    <p><strong>Stock disponible:</strong> {{producto.stock}}</p>
+    <p><strong>Código de producto:</strong> {{producto.code}}</p>
+
+    {{#if (gt producto.stock 0)}}
+      <button class="btn-add" data-pid="{{producto._id}}">🛒 Agregar al carrito</button>
+    {{else}}
+      <button class="btn-add disabled" disabled>❌ Sin stock</button>
+    {{/if}}
+
+    <a href="/" class="btn-volver">← Volver al catálogo</a>
+  </div>
+</div>
+
+<script src="/js/detalles.js"></script>
+<script src="/js/global.js"></script>

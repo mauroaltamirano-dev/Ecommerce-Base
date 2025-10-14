@@ -1,0 +1,31 @@
+<div class="ticket container">
+  <h1 class="ticket-title">🎟️ Ticket de Compra</h1>
+
+  <ul class="ticket-detalle">
+    <li><strong>Código:</strong> {{ticket.code}}</li>
+    <li><strong>Fecha:</strong> {{formatDate ticket.purchase_datetime}}</li>
+    <li><strong>Total:</strong> ${{formatNumber ticket.amount}}</li>
+    <li><strong>Comprador:</strong> {{ticket.purchaser}}</li>
+  </ul>
+
+  <h2 class="ticket-subtitle">🛍️ Productos Comprados</h2>
+
+  <div class="table-responsive">
+    <table class="ticket-products">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each ticket.products}}
+        <tr>
+          <td>{{this.title}}</td>
+          <td>x{{this.quantity}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

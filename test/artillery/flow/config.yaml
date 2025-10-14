@@ -1,0 +1,21 @@
+config:
+  target: "http://localhost:8090/api"
+  http:
+    cookieJar: true
+  phases:
+    - duration: 20
+      arrivalRate: 10
+
+scenarios:
+  - name: login & signout
+    flow:
+      - log: "▶️ Login"
+      - post:
+          url: "/auth/login"
+          json:
+            email: "m.e.altamirano88@gmail.com"
+            password: "tuki123"
+      - think: 1
+      - log: "🔒 Signout"
+      - post:
+          url: "/auth/signout"
