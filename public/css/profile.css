@@ -37,6 +37,13 @@
   border-bottom: 1px solid var(--color-bg);
 }
 
+#avatar-profile {
+  display: flex;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+}
+
 .label {
   font-weight: 600;
   color: var(--color-secondary);
@@ -49,7 +56,7 @@
 
 .btn-back {
   display: block;
-  margin: var(--space-lg) auto 0;
+  margin: var(--space-sm) auto 0;
   text-align: center;
   padding: var(--space-sm) var(--space);
   background: var(--color-accent);
@@ -60,7 +67,19 @@
 }
 
 .btn-back:hover {
-  opacity: 0.9;
+  opacity: 0.8;
+}
+
+.btn-edit-profile {
+  background-color: orange;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+
+  border-radius: var(--space-sm);
 }
 
 @media (max-width: var(--bp-md)) {
@@ -71,4 +90,25 @@
     font-size: 1rem;
     padding: var(--space-sm);
   }
+}
+
+.profile-input {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-right: 0.5rem;
+}
+
+.btn-save {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-save:hover {
+  background-color: #007bff;
 }

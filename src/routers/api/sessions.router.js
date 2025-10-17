@@ -14,8 +14,8 @@ class SessionRouter extends CustomRouter {
     if (!req.user)
       return res.status(401).json({ error: "Usuario no autenticado" });
 
-    const { _id, email, name, last_name, role } = req.user;
-    res.json200({ _id, email, name, last_name, role });
+    const { _id, email, name, last_name, role, avatar } = req.user;
+    res.json200({ _id, email, name, last_name, role, avatar });
   };
 }
 

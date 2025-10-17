@@ -118,6 +118,29 @@ class Controller {
       res.status(500).json({ mensaje: "Error del servidor" });
     }
   };
+
+  updateMe = async (req, res) => {
+    try {
+      console.log(req.user);
+      const userId = req.user._id; // debe venir del JWT
+      const updates = req.body;
+
+      const updatedUser = await this.service.updateById(userId, updates);
+
+      if (!updatedUser)
+        return res.status(404).json({ mensaje: "Usuario no encontrado" });
+
+      res.json({
+        mensaje: "Perfil actualizado correctamente",
+        usuario: updatedUser,
+      });
+    } catch (error) {
+      res.status(500).json({
+        mensaje: "Error al actualizar el perfil",
+        detalles: error.message,
+      });
+    }
+  };
 }
 
 export default Controller;

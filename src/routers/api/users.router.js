@@ -12,6 +12,7 @@ class UsersRouter extends CustomRouter {
     this.read("/:id", ["USER", "ADMIN"], usersController.readById);
     this.update("/:id", ["USER", "ADMIN"], usersController.updateById);
     this.destroy("/:id", ["USER", "ADMIN"], usersController.destroyById);
+    this.patch("/me", ["USER", "ADMIN"], usersController.updateMe);
   };
 }
 

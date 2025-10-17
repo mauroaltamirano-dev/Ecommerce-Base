@@ -1,0 +1,94 @@
+/* 🎨 Estilos generales */
+.container-p {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
+}
+
+/* 🏷️ Título */
+.form-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* 🧾 Formulario */
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* 📦 Grupos */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  outline: none;
+}
+
+/* 📝 Textarea */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  max-height: 200px;
+}
+
+/* 🔘 Botón */
+.btn-add {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.btn-add:hover {
+  background-color: #0056b3;
+}
+
+.btn-add:active {
+  transform: scale(0.98);
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .btn-add {
+    width: 100%;
+  }
+}

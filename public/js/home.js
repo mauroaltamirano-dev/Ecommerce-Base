@@ -32,5 +32,7 @@ document.querySelectorAll(".btn-add").forEach((btn) => {
       timer: 1500,
       timerProgressBar: true,
     });
+
+    location.reload()
   });
 });

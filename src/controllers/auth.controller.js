@@ -40,6 +40,7 @@ const setAdmin = async (req, res) => {
       role: user.role,
       name: user.name,
       last_name: user.last_name,
+      avatar: user.avatar,
     });
 
     res
@@ -67,6 +68,7 @@ const setUser = async (req, res) => {
       role: user.role,
       name: user.name,
       last_name: user.last_name,
+      avatar: user.avatar,
     });
 
     res

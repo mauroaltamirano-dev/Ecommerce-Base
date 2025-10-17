@@ -21,6 +21,8 @@ class ViewsRouter extends CustomRouter {
     this.read("/product/:pid", ["PUBLIC"], this.productDetail);
     this.read("/cart/:cid", ["PUBLIC"], this.cart);
     this.read("/ticket/:tid", ["PUBLIC"], this.ticketView);
+    this.read("/createproduct", ["ADMIN"], this.createProduct);
+    this.read("/createproduct/:pid", ["ADMIN"], this.updateProduct);
   };
 
   buyCart = async (req, res) => {
@@ -93,6 +95,49 @@ class ViewsRouter extends CustomRouter {
         carritoId: cid,
         categorias,
         style: ["realTimeProducts", "navbar", "global"],
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  createProduct = async (req, res, next) => {
+    try {
+      const categorias = Product.schema.path("category").enumValues;
+
+      res.render("createProduct", {
+        title: "Crear nuevo producto",
+        categorias,
+        style: ["createProduct", "navbar", "global"],
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  updateProduct = async (req, res, next) => {
+    try {
+      const { pid } = req.params;
+
+      // 🔹 Traer las categorías definidas en el schema
+      const categorias = Product.schema.path("category").enumValues;
+
+      // 🔹 Buscar el producto directamente en MongoDB
+      const producto = await Product.findById(pid).lean();
+
+      if (!producto) {
+        return res.status(404).render("errors/404", {
+          mensaje: "Producto no encontrado",
+          style: ["error", "global"],
+        });
+      }
+
+      // 🔹 Renderizar la vista con los datos del producto cargados
+      res.render("createProduct", {
+        title: "Editar producto",
+        producto,
+        categorias,
+        style: ["createProduct", "navbar", "global"],
       });
     } catch (err) {
       next(err);

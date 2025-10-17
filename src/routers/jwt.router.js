@@ -15,8 +15,10 @@ router.post("/jwt/login", async (req, res) => {
   const token = generateToken({
     id: user._id,
     name: user.first_name,
+    lastName: user.last_name,
     role: user.role,
     email: user.email,
+    avatar: user.avatar,
   });
 
   res.json({ token });

@@ -51,7 +51,7 @@ server.engine(
       ifEquals: (a, b, options) =>
         a === b ? options.fn(this) : options.inverse(this),
       section: sections(),
-      json: (context) => JSON.stringify(context, null, 2),
+      json: (context) => JSON.stringify(context).replace(/'/g, "&apos;"),
     },
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
@@ -79,13 +79,16 @@ server.use((req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_KEY);
+      console.log(decoded);
       res.locals.usuario = {
+        id: decoded.user_id?.toString(),
         name: decoded.name || "",
         last_name: decoded.last_name || "",
         email: decoded.email,
         role: decoded.role,
+        avatar: decoded.avatar,
       };
-      // console.log("🧠 Nuevo token payload:", decoded);
+      console.log("🧠 Nuevo token payload:", decoded);
       // console.log(" CID:", cid);
     } catch (e) {
       res.locals.usuario = null;
@@ -95,6 +98,7 @@ server.use((req, res, next) => {
   }
   next();
 });
+
 server.use(express.static(path.join(__dirname, "public")));
 
 // 3) swagger

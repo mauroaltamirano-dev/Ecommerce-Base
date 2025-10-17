@@ -1,21 +1,9 @@
 <div class="admin-products container">
   <h1>{{title}}</h1>
 
-  <form id="productForm" class="form-products">
-    <input type="text" name="title" placeholder="Título" required />
-    <input type="number" name="price" placeholder="Precio" required />
-    <input type="number" name="stock" placeholder="Stock" />
-    <input type="text" name="code" placeholder="Código único" required />
-    <select name="category" required>
-      <option value="">Seleccionar categoría</option>
-      {{#each categorias}}
-        <option value="{{this}}">{{this}}</option>
-      {{/each}}
-    </select>
-    <input type="text" name="description" placeholder="Descripción" required />
-    <input type="url" name="image" placeholder="URL de imagen" required />
-    <button type="submit" class="btn-add">Agregar producto</button>
-  </form>
+  <div class="add-product">
+    <button class="btn-add"><a href="/createproduct">Añadir nuevo producto</a></button>
+  </div>
 
   <div class="table-responsive">
     <table class="products-table">
@@ -34,43 +22,25 @@
         {{#each productos}}
           <tr>
             <td>{{this.title}}</td>
-            <td>
-              $<span class="precio-valor">{{formatNumber this.price}}</span>
-              <input
-                type="number"
-                class="precio-input"
-                value="{{this.price}}"
-                style="display:none; width:80px;"
-              />
-              <button class="btn-edit-price" data-id="{{this._id}}">✏️</button>
-              <button
-                class="btn-save-price"
-                data-id="{{this._id}}"
-                style="display:none;"
-              >💾</button>
-            </td>
-            <td class="stock-cell">
-              {{this.stock}}
-              <button
-                class="btn-stock-increase"
-                data-id="{{this._id}}"
-              >+</button>
-              <button
-                class="btn-stock-decrease"
-                data-id="{{this._id}}"
-              >−</button>
-            </td>
+            <td>${{formatNumber this.price}}</td>
+            <td>{{this.stock}}</td>
             <td>{{this.category}}</td>
             <td>{{this.code}}</td>
-            <td><img
+            <td>
+              <img
                 src="{{this.image}}"
                 alt="Imagen de {{this.title}}"
                 class="img-mini"
-              /></td>
-            <td><button
-                class="btn-eliminar"
-                data-id="{{this._id}}"
-              >Eliminar</button></td>
+              />
+            </td>
+            <td>
+              <button class="btn-editar" data-id="{{this._id}}">
+                Editar
+              </button>
+              <button class="btn-eliminar" data-id="{{this._id}}">
+                Eliminar
+              </button>
+            </td>
           </tr>
         {{/each}}
       </tbody>
